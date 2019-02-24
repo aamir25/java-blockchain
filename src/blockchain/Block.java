@@ -11,9 +11,9 @@ public class Block {
 	private String data;
 	private int nounce;
 	
-	public Block(int index, long timestamp, String previousHash, String data) {
+	public Block(int index, String previousHash, String data) {
 		this.index = index;
-		this.timestamp = timestamp;
+		this.timestamp = System.currentTimeMillis();
 		this.previousHash = previousHash;
 		this.data = data;
 		nounce = 0;
@@ -84,5 +84,14 @@ public class Block {
 		}
 		
 		return null;
+	}
+	
+	public void mineBlock(int difficulty) {
+		nounce = 0;
+		
+		do {
+			hash = Block.calculateHash(this);
+			nounce++;
+		} while(!getHash().substring(0, difficulty).equals(Utils.getZeroes(difficulty)));
 	}
 }

@@ -96,7 +96,7 @@ public class Chain {
 		StringBuilder builder = new StringBuilder();
 		
 		for(Block block: chain) {
-			builder.append(block);
+			builder.append(block).append('\n');
 		}
 		
 		return builder.toString();
